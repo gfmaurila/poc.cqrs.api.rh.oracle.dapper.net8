@@ -18,6 +18,10 @@
 - Resut Pattern
 - Domain Events
 
+- ![image](https://github.com/gfmaurila/poc.cqrs.api.core.sqlserver.ef.net8/assets/5544035/d468e5d6-0d4d-40ba-a074-38204bc6a9b3)
+- ![image](https://github.com/gfmaurila/poc.cqrs.api.core.sqlserver.ef.net8/assets/5544035/e3f22b99-ae7c-4361-b6f4-bab7d0951aaa)
+- ![image](https://github.com/gfmaurila/poc.cqrs.api.core.sqlserver.ef.net8/assets/5544035/14fc2aff-7594-4f6d-9d8d-6cd3af2d2011)
+
 # Raiz do projeto
 
 ## poc.cqrs.api.rh.oracle.dapper.net8
