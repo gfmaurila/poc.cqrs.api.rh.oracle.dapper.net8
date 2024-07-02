@@ -10,18 +10,18 @@ RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /
 USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src/poc.cqrs.api.rh.oracle.dapper.net8/src/01-Presentation
+WORKDIR /src/01-Presentation
 
 # Copia o arquivo .csproj para o diretório de trabalho atual no contêiner
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/01-Presentation/Poc.RH.API/Poc.RH.API.csproj .
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/02-Application/Poc.Command/Poc.Command.csproj .
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/03-Domain/Poc.Domain/Poc.Domain.csproj .
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/02-Application/Poc.Query/Poc.Query.csproj .
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/02-Application/Poc.Contract/Poc.Contract.csproj .
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/04-Infrastructure/Database/Poc.Oracle/Poc.Oracle.csproj .
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/04-Infrastructure/DistributedCache/Poc.DistributedCache/Poc.DistributedCache.csproj .
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/04-Infrastructure/Integration/Poc.RabbiMQ/Poc.RabbiMQ.csproj .
-COPY src/poc.cqrs.api.rh.oracle.dapper.net8/src/04-Infrastructure/Integration/Poc.Auth/Poc.Auth.csproj .
+COPY src/01-Presentation/Poc.RH.API/Poc.RH.API.csproj .
+COPY src/02-Application/Poc.Command/Poc.Command.csproj .
+COPY src/03-Domain/Poc.Domain/Poc.Domain.csproj .
+COPY src/02-Application/Poc.Query/Poc.Query.csproj .
+COPY src/02-Application/Poc.Contract/Poc.Contract.csproj .
+COPY src/04-Infrastructure/Database/Poc.Oracle/Poc.Oracle.csproj .
+COPY src/04-Infrastructure/DistributedCache/Poc.DistributedCache/Poc.DistributedCache.csproj .
+COPY src/04-Infrastructure/Integration/Poc.RabbiMQ/Poc.RabbiMQ.csproj .
+COPY src/04-Infrastructure/Integration/Poc.Auth/Poc.Auth.csproj .
 
 # Restaura as dependências do projeto
 RUN dotnet restore Poc.RH.API.csproj
@@ -30,11 +30,11 @@ RUN dotnet restore Poc.RH.API.csproj
 COPY . .
 
 # Define o diretório de trabalho e constrói o projeto
-WORKDIR /src/poc.cqrs.api.rh.oracle.dapper.net8/src/01-Presentation
-RUN dotnet build src/poc.cqrs.api.rh.oracle.dapper.net8/src/01-Presentation/Poc.RH.API/Poc.RH.API.csproj -c Release -o /app/build
+WORKDIR /src/01-Presentation
+RUN dotnet build src/01-Presentation/Poc.RH.API/Poc.RH.API.csproj -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish src/poc.cqrs.api.rh.oracle.dapper.net8/src/01-Presentation/Poc.RH.API/Poc.RH.API.csproj -c Release -o /app/publish
+RUN dotnet publish src/01-Presentation/Poc.RH.API/Poc.RH.API.csproj -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
